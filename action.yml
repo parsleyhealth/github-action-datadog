@@ -1,0 +1,38 @@
+name: 'Notification event to datadog'
+description: 'Notify datadog with events'
+branding:
+  icon: message-square
+  color: orange
+inputs:
+  datadog_api_key:
+    description: api key
+    required: true
+  parsley_environment:
+    description: env description
+    required: true
+  parsley_componentname:
+    description: component name
+    required: true
+  event_title:
+    description: title description
+    required: true
+    default: "deploy"
+  event_text:
+    description: text description
+    required: true
+    default: "Deploy Event for ${GITHUB_REPOSITORY}#${GITHUB_REF}"
+  event_priority:
+    description: priority description
+    required: false
+    default: 'normal'
+  alert_type:
+    description: title description
+    required: false
+    default: 'info'
+outputs:
+  datadog_response:
+    description: Datadog response
+
+runs:
+  using: 'node12'
+  main: 'index.js'
