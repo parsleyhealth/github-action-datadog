@@ -6,20 +6,20 @@ branding:
 inputs:
   datadog_api_key:
     description: api key
-    required: true
+    required: false
   parsley_environment:
     description: env description
-    required: true
+    required: false
   parsley_componentname:
     description: component name
-    required: true
+    required: false
   event_title:
     description: title description
-    required: true
+    required: false
     default: "deploy"
   event_text:
     description: text description
-    required: true
+    required: false
     default: "Deploy Event for ${GITHUB_REPOSITORY}#${GITHUB_REF}"
   event_priority:
     description: priority description
