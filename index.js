@@ -14,7 +14,7 @@ try {
 
     console.log(`Hello  ${datadog_api_key} ${parsley_componentname}   ${parsley_environment}  ${event_title} ${event_text} ${event_priority} ${alert_type} `);
     const time = (new Date()).toTimeString();
-    core.setOutput("datadog_response", key);
+    core.setOutput("datadog_response", datadog_api_key);
     // Get the JSON webhook payload for the event that triggered the workflow
     const payload = JSON.stringify(github.context.payload, undefined, 2)
     console.log(`The event payload: ${payload}`);
