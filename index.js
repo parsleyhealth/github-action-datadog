@@ -4,7 +4,7 @@ const github = require('@actions/github');
 try {
     // `who-to-greet` input defined in action metadata file
     const datadog_api_key = core.getInput('datadog_api_key');
-    const parsley_environment = core.getInput('parsley_environment');
+    const parsley_environment = core.getInput('VAR1');
     const parsley_componentname = core.getInput('parsley_componentname');
     const event_title = core.getInput('event_title');
     const event_text = core.getInput('event_text');
