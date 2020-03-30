@@ -16,7 +16,7 @@ try {
     //var response = res.resolve;
 
     response_promise.then(function(value) {
-        console.log('value: ' + value);
+        console.log('value: ' + value.readBody());
 
     });
 
