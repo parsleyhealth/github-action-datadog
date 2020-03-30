@@ -10,7 +10,8 @@ const run = async () => {
   core.debug(`datadog_api_key: ${datadog_api_key}`);
 
   const http = new httpm.HttpClient("http-client-tests");
-  let data =  { name: 'foo' };
+  let data =  JSON.stringify({ name: 'foo' });
+
   const response  = await http.post('https://httpbin.org/post', data);
   const body = await response.readBody();
   core.debug(body);
