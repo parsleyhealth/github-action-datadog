@@ -40,7 +40,7 @@ try {
             };
 
 
-            var response = http.IHttpClient.postJson(datadog_uri, datadog_payload);
+            var response = http.post(datadog_uri, datadog_payload);
             console.log(`response ${response}`)
 
 
