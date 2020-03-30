@@ -48,7 +48,7 @@ inputs:
   metric_tags:
     description: name
     required: false
-    default: []
+    default: [""]
   alert_type:
     description: title description
     required: false
