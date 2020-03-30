@@ -1,0 +1,18 @@
+name: "test-local"
+on:
+  push:
+    branches:
+      - master
+      - michael/test
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - run: npm ci
+
+      - uses: ./
+        with:
+          datadog_api_key: "foobar"
