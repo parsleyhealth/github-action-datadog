@@ -13,7 +13,7 @@ try {
     _http = new httpm.HttpClient('http-client-tests');
 
     var res = _http.get('http://httpbin.org/get');
-    var response = res.resolve();
+    var response = res.resolve;
 
 
     var body = response.readBody();
