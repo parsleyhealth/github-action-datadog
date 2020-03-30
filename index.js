@@ -31,7 +31,7 @@ const run = async () => {
           }
         ]
       });
-
+  core.debug(datadog_metric_payload)
   const response  = await http.post(datadog_uri, datadog_metric_payload);
   const body = await response.readBody();
   core.debug(body);
