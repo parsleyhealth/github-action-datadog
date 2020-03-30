@@ -40,7 +40,7 @@ try {
             };
 
 
-            var response = http.postJson(datadog_uri, datadog_payload);
+            var response = httpm.postJson(datadog_uri, datadog_payload);
             console.log(`response ${response}`)
 
 
