@@ -1,6 +1,6 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
-const httpm = require('@actions/http-client');
+const http = require('@actions/http-client');
 
 try {
     // `who-to-greet` input defined in action metadata file
@@ -40,7 +40,7 @@ try {
             };
 
 
-            var response = httpm.postJson(datadog_uri, datadog_payload);
+            var response = http.IHttpClient.postJson(datadog_uri, datadog_payload);
             console.log(`response ${response}`)
 
 
