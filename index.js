@@ -16,8 +16,8 @@ const run = async () => {
     //
     //   core.debug(payload)
     const current_time = Math.round((new Date()).getTime() / 1000);
-    const reponame = payload['full_name']
-    const branchname = payload['ref'].split('/').pop();
+    const reponame = payload["full_name"];
+    const branchname = payload["ref"].split('/').pop();
     const gitsha = payload['after'] // confirm
     const gitauthor = payload['commits'][0]['author']['username']
     const last_commit_timestamp = Math.round((Date.parse(payload['head_commit']['timestamp'])).getTime() / 1000);
