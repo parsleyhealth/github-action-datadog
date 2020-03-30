@@ -1,5 +1,4 @@
-const core = require('@actions/core');
-const github = require('@actions/github');
+const core = require('@actions/core');');
 const http = require('http');
 
 
@@ -28,7 +27,7 @@ try {
         }
     };
 
-    const req = http.request(options, (res) => {
+    const req = http.get(options, (res) => {
         console.log(`STATUS: ${res.statusCode}`);
         console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
         res.setEncoding('utf8');
@@ -47,51 +46,51 @@ try {
 // Write data to request body
     req.write(postData);
     req.end();
-
-    switch(core.getInput('datadog_type')) {
-        case 'event':
-            // code block
-            const event_title = core.getInput('event_title');
-            const event_text = core.getInput('event_text');
-            const event_priority = core.getInput('event_priority');
-            const event_tags = core.getInput('event_tags');
-            const alert_type = core.getInput('alert_type');
-
-            break;
-        case 'metric':
-            const metric_name = core.getInput('metric_name');
-            const metric_value = core.getInput('metric_value');
-            const metric_type = core.getInput('metric_type');
-            const metric_interval = core.getInput('metric_interval');
-            const metric_host = core.getInput('metric_host');
-            const metric_tags = core.getInput('metric_tags');
-
-
-            var datadog_payload = { 'series': [{
-                    'metric': metric_name,
-                    'points': [[current_time, metric_value]],
-                    'type':  metric_type,
-                    'interval': metric_interval,
-                    'host': metric_host,
-                    'tags': metric_tags
-                }]
-            };
-            request.queryParams.datadog_api_key = datadog_api_key
-            response.content = '';
-            response.headers['Content-Type'] = 'application/json';
-            resp = httpClient.post(datadog_uri, datadog_payload);
-            var body = resp.content.asJSON;
-           // var response =
-            console.log(`response ${body}`)
-
-
-        // code block
-    }
-
-    console.log(`Hello  ${datadog_api_key} ${parsley_componentname}   ${parsley_environment}  ${event_title} ${event_text} ${event_priority} ${alert_type} `);
-
-    console.log(`The event payload: ${payload}`);
-
+    //
+    // switch(core.getInput('datadog_type')) {
+    //     case 'event':
+    //         // code block
+    //         const event_title = core.getInput('event_title');
+    //         const event_text = core.getInput('event_text');
+    //         const event_priority = core.getInput('event_priority');
+    //         const event_tags = core.getInput('event_tags');
+    //         const alert_type = core.getInput('alert_type');
+    //
+    //         break;
+    //     case 'metric':
+    //         const metric_name = core.getInput('metric_name');
+    //         const metric_value = core.getInput('metric_value');
+    //         const metric_type = core.getInput('metric_type');
+    //         const metric_interval = core.getInput('metric_interval');
+    //         const metric_host = core.getInput('metric_host');
+    //         const metric_tags = core.getInput('metric_tags');
+    //
+    //
+    //         var datadog_payload = { 'series': [{
+    //                 'metric': metric_name,
+    //                 'points': [[current_time, metric_value]],
+    //                 'type':  metric_type,
+    //                 'interval': metric_interval,
+    //                 'host': metric_host,
+    //                 'tags': metric_tags
+    //             }]
+    //         };
+    //         request.queryParams.datadog_api_key = datadog_api_key
+    //         response.content = '';
+    //         response.headers['Content-Type'] = 'application/json';
+    //         resp = httpClient.post(datadog_uri, datadog_payload);
+    //         var body = resp.content.asJSON;
+    //        // var response =
+    //         console.log(`response ${body}`)
+    //
+    //
+    //     // code block
+    // }
+    //
+    // console.log(`Hello  ${datadog_api_key} ${parsley_componentname}   ${parsley_environment}  ${event_title} ${event_text} ${event_priority} ${alert_type} `);
+    //
+    // console.log(`The event payload: ${payload}`);
+    //
 
 } catch (error) {
     core.setFailed(error.message);
