@@ -1,6 +1,6 @@
-import http from "http";
-
 const core = require('@actions/core');
+const http = require('http');
+
 
 try {
     // `who-to-greet` input defined in action metadata file
