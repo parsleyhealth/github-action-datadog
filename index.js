@@ -30,18 +30,17 @@ try {
 
 
             var datadog_payload = { 'series': [{
-                    'metric': 'com.parsleyhealth.cicd.test',
-                    'points': [[current_time, metric_value ]],
+                    'metric': metric_name,
+                    'points': [[current_time, metric_value]],
                     'type':  metric_type,
                     'interval': metric_interval,
                     'host': metric_host,
                     'tags': metric_tags
                 }]
             };
-            (async () => {
-                let payload: any = datadog_metric_payload;
-                let response: ifm.ITypedResponse<HttpBinData> = await _http.postJson<HttpBinData>(datadog_uri, datadog_payload);
 
+            (async () => {
+                let response: ifm.ITypedResponse<HttpBinData> = await _http.postJson<HttpBinData>(datadog_uri, datadog_payload);
 
             }
 
