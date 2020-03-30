@@ -13,9 +13,12 @@ try {
     _http = new httpm.HttpClient('http-client-tests');
 
     var res = _http.get('http://httpbin.org/get');
-    console.log(res);
+    var response = res.resolve();
 
-    var body = {}
+
+    var body = response.readBody();
+    console.log(body);
+
     var obj = JSON.parse(body);
     const time = (new Date()).toTimeString();
     core.setOutput("datadog_response", obj);
