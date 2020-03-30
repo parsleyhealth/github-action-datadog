@@ -12,7 +12,7 @@ try {
     const current_time = (new Date()).toTimeString();
     const keepAliveAgent = new http.Agent({ keepAlive: true });
 
-    const postData = querystring.stringify({
+    const postData =  JSON.stringify({
         'msg': 'Hello World!'
     });
 
