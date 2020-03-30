@@ -13,10 +13,10 @@ try {
     _http = new httpm.HttpClient('http-client-tests');
 
      async(done) => {
-        let res: httpm.HttpClientResponse = await _http.get('http://httpbin.org/get');
+        var res = httpm.HttpClientResponse = await _http.get('http://httpbin.org/get');
         expect(res.message.statusCode).toBe(200);
-        let body: string = await res.readBody();
-        let obj: any = JSON.parse(body);
+        var body = await res.readBody();
+        var obj = JSON.parse(body);
         expect(obj.url).toBe("http://httpbin.org/get");
         expect(obj.headers["User-Agent"]).toBeTruthy();
         done();
