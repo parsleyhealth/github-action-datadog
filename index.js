@@ -12,12 +12,13 @@ const run = async () => {
     const parsley_environment = 'staging'
 
     const payload = await JSON.stringify(github.context.payload, undefined, 2)
-    // core.debug("github payload")
+    core.debug("github payload")
     //
-    core.debug(payload['ref'])
+    core.debug(payload.ref)
+    core.debug(payload.full_name)
     const current_time = Math.round((new Date()).getTime() / 1000);
-    const reponame = payload["full_name"];
-    const branchname = payload["ref"].split('/').pop();
+    const reponame = payload.full_name;
+    const branchname = payload.ref.stringify().split('/').pop();
     const gitsha = payload['after'] // confirm
     const gitauthor = payload['commits'][0]['author']['username']
     const last_commit_timestamp = Math.round((Date.parse(payload['head_commit']['timestamp'])).getTime() / 1000);

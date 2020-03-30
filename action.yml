@@ -13,42 +13,6 @@ inputs:
   parsley_componentname:
     description: component name
     required: false
-  event_title:
-    description: title description
-    required: false
-    default: "deploy"
-  event_text:
-    description: text description
-    required: false
-    default: "Deploy Event for ${GITHUB_REPOSITORY}#${GITHUB_REF}"
-  event_priority:
-    description: priority description
-    required: false
-    default: 'normal'
-  metric_name:
-    description: name
-    required: false
-    default: "com.parsleyhealth.cicd.deploy"
-  metric_value:
-    description: name
-    required: false
-    default: 1
-  metric_type:
-    description: name
-    required: false
-    default: "count"
-  metric_interval:
-    description: name
-    required: false
-    default: 20
-  metric_host:
-    description: name
-    required: false
-    default: "cicd.parsleyhealth.com"
-  metric_tags:
-    description: name
-    required: false
-    default: '[""]'
   alert_type:
     description: alert
     required: false
