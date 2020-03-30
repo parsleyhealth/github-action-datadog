@@ -1,6 +1,6 @@
-const core = require('@actions/core');
-const http = require('http');
+import http from "http";
 
+const core = require('@actions/core');
 
 try {
     // `who-to-greet` input defined in action metadata file
@@ -16,18 +16,19 @@ try {
     });
 
     const options = {
-        hostname: 'www.google.com',
+        hostname: 'api.datadoghq.com',
         agent: keepAliveAgent,
         port: 80,
-        path: '/upload',
+        path: '/api/v1/series?api_key=' + datadog_api_key,
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
             'Content-Length': Buffer.byteLength(postData)
-        }
+        },
+        data: postData
     };
 
-    const req = http.get(options, (res) => {
+    const req = http. (options, (res) => {
         console.log(`STATUS: ${res.statusCode}`);
         console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
         res.setEncoding('utf8');
