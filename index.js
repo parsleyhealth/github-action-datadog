@@ -5,31 +5,60 @@ const httpm = require("@actions/http-client");
 const run = async () => {
   const datadog_api_key = core.getInput("datadog_api_key");
   const datadog_uri = "https://api.datadoghq.com/api/v1/series?api_key=" + datadog_api_key
-  const metric_name = core.getInput("metric_name");
-  const metric_value = core.getInput("metric_value");
-  const metric_type = core.getInput("metric_type");
-  const metric_interval = core.getInput("metric_interval");
-  const metric_host = core.getInput("metric_host");
-  const metric_tags = core.getInput("metric_tags");
-  const current_time = Math.round((new Date()).getTime() / 1000);
-  core.debug("debugging debug");
+  // const parsley_componentname = core.getInput("parsley_componentname");
+  // const parsley_environment = core.getInput("parsley_environment");
+  const parsley_componentname = 'cicd_test'
+  const parsley_environment = 'staging'
 
-  core.debug(`datadog_api_key: ${datadog_api_key}`);
+  const payload = JSON.stringify(github.context.payload, undefined, 2)
+  core.debug("github payload")
+
+  core.debug(payload)
+
+  // const reponame = payload.reponame
+  // const branchname = payload.branchname
+  // const gitsha =
+  // const gitauthor =
+
+  console.log(datadog_event_payload);
+
+  const event_title = "Deploy event for " + parsley_componentname + " in env: " + parsley_environment
+  const event_text =  "Deploy event for " + parsley_componentname + " in env: " + parsley_environment
+  const event_priority = "normal"
 
   const http = new httpm.HttpClient("http-client-tests");
+
+  const parsley_tags = [
+    "environment:" + parsley_environment + " ",
+    "componentname:" + parsley_componentname + " ",
+    "reponame:" + reponame + " ",
+    "branchname:" + branchname + " ",
+    "gitsha" + gitsha + " ",
+    "gitauthor" + gitauthor + " "
+  ]
+
+  const current_time = Math.round((new Date()).getTime() / 1000);
 
   let datadog_metric_payload = JSON.stringify({
         series: [
           {
-            metric: metric_name,
-            points: [[current_time, metric_value]],
-            type: metric_type,
+            metric: "com.parsleyhealth.cicd.deploy",
+            points: [[current_time, 1]],
+            type: "count",
             interval: 20,
-            host: metric_host,
-            tags: metric_tags
+            host: "cicd.parsleyhealth.com",
+            tags: parsley_tags
           }
         ]
       });
+
+  let datadog_event_payload = JSON.stringify({
+    title: "Deploy event for " + parsley_componentname,
+    text:  "Deploy event for " + parsley_componentname,
+    priority: "normal",
+    tags: parsley_tags
+  });
+
   core.debug(datadog_metric_payload)
   const response  = await http.post(datadog_uri, datadog_metric_payload);
   const body = await response.readBody();
@@ -37,76 +66,3 @@ const run = async () => {
 };
 
 run();
-
-// try {
-//   // `who-to-greet` input defined in action metadata file
-//   const datadog_api_key = core.getInput("datadog_api_key");
-//   const parsley_environment = core.getInput("parsley_environment");
-//   const parsley_componentname = core.getInput("parsley_componentname");
-//   const datadog_uri =
-//     "https://api.datadoghq.com/api/v1/series?api_key=" + datadog_api_key;
-//   const current_time = new Date().toTimeString();
-
-//   switch (core.getInput("datadog_type")) {
-//     case "event":
-//       // code block
-//       const event_title = core.getInput("event_title");
-// //       const event_text = core.getInput("event_text");
-// //       const event_priority = core.getInput("event_priority");
-// //       const event_tags = core.getInput("event_tags");
-//       const alert_type = core.getInput("alert_type");
-
-//       break;
-//     case "metric":
-//       const metric_name = core.getInput("metric_name");
-//       const metric_value = core.getInput("metric_value");
-//       const metric_type = core.getInput("metric_type");
-//       const metric_interval = core.getInput("metric_interval");
-//       const metric_host = core.getInput("metric_host");
-//       const metric_tags = core.getInput("metric_tags");
-
-//       var datadog_metric_payload = {
-//         series: [
-//           {
-//             metric: "com.parsleyhealth.cicd.test",
-//             points: [[current_time, metric_value]],
-//             type: metric_type,
-//             interval: metric_interval,
-//             host: metric_host,
-//             tags: metric_tags
-//           }
-//         ]
-//       };
-
-//       var json = JsonConvert.SerializeObject(datadog_metric_payload);
-//       var content = new StringContent(json, Encoding.UTF8, "application/json");
-//       var response = http.post(datadog_uri, content);
-//       core.setOutput("datadog_response", response);
-
-//       break;
-//     default:
-//     // code block
-//   }
-
-//   console.log(
-//     `Hello  ${datadog_api_key} ${parsley_componentname}   ${parsley_environment}  ${event_title} ${event_text} ${event_priority} ${alert_type} `
-//   );
-
-//   console.log(`The event payload: ${payload}`);
-// } catch (error) {
-//   core.setFailed(error.message);
-// }
-
-// // current_time=`date +%s`
-// // METRIC_JSON="{ \"series\":  [{ \"metric\":\"${METRIC_NAME}\",
-// //                               \"points\":[[$current_time,${METRIC_VALUE}]],
-// //                               \"type\":\"${METRIC_TYPE}\",
-// //                               \"interval\": ${METRIC_INTERVAL},
-// //                               \"host\":\"${METRIC_HOST}\",
-// //                               \"tags\": ${METRIC_TAGS}
-// // }]
-// // }"
-// //
-// // DATADOG_URL="https://api.datadoghq.com/api/v1/series?api_key=${DATADOG_API_KEY}"
-// // curl  -X POST -H "Content-type: application/json" -d "$METRIC_JSON" "$DATADOG_URL"
-// //
