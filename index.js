@@ -12,8 +12,7 @@ const run = async () => {
   const http = new httpm.HttpClient("http-client-tests");
   const googleUri = "https://www.google.com/robots.txt";
   const response = await http.get(googleUri);
-  const jsonResponse = response.json();
-  core.debug(jsonResponse);
+  core.debug(response);
 };
 
 run();
