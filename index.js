@@ -19,9 +19,9 @@ const run = async () => {
     const current_time = Math.round((new Date()).getTime() / 1000);
     const reponame = payload.full_name;
     const branchname = payload.ref.stringify().split('/').pop();
-    const gitsha = payload['after'] // confirm
-    const gitauthor = payload['commits'][0]['author']['username']
-    const last_commit_timestamp = Math.round((Date.parse(payload['head_commit']['timestamp'])).getTime() / 1000);
+    const gitsha = payload.after // confirm
+    const gitauthor = payload.commits[0]['author']['username']
+    const last_commit_timestamp = Math.round((Date.parse(payload.head_commit['timestamp'])).getTime() / 1000);
     const lead_time = (current_time - last_commit_timestamp);
 
     const event_title = "Deploy event for " + parsley_componentname + " in env: " + parsley_environment
