@@ -9,10 +9,18 @@ const parsley_componentname = core.getInput('parsley_componentname');
 const datadog_uri = "https://api.datadoghq.com/api/v1/series?api_key=" + datadog_api_key
 const current_time = (new Date()).toTimeString();
 
-async() => {
-    var jsonObj = await _http.postJson(datadog_uri, {}, {});
-    console.log(jsonObj)
+async function run() {
+    try {
+        const ms = core.getInput('metric_value');
+        console.log(`Waiting ${ms} milliseconds ...`)
+        var jsonObj = httpm.HttpClient.get(datadog_uri, {}, {});
+        console.log(`${jsonObj}`)
+        core.setOutput("datadog_response", "testing");
+    } catch (e) {
+
+    }
 }
+
 
 // switch(core.getInput('datadog_type')) {
     //     case 'event':
