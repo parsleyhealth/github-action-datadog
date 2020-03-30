@@ -5,13 +5,31 @@ const httpm = require("@actions/http-client");
 const run = async () => {
   const datadog_api_key = core.getInput("datadog_api_key");
   const datadog_uri = "https://api.datadoghq.com/api/v1/series?api_key=" + datadog_api_key
+  const metric_name = core.getInput("metric_name");
+  const metric_value = core.getInput("metric_value");
+  const metric_type = core.getInput("metric_type");
+  const metric_interval = core.getInput("metric_interval");
+  const metric_host = core.getInput("metric_host");
+  const metric_tags = core.getInput("metric_tags");
+  const current_time = new Date().toTimeString();
 
   core.debug("debugging debug");
 
   core.debug(`datadog_api_key: ${datadog_api_key}`);
 
   const http = new httpm.HttpClient("http-client-tests");
-  let data =  JSON.stringify({ name: 'foo' });
+  let datadog_metric_payload = JSON.stringify({
+        series: [
+          {
+            metric: metric_name,
+            points: [[current_time, metric_value]],
+            type: metric_type,
+            interval: metric_interval,
+            host: metric_host,
+            tags: metric_tags
+          }
+        ]
+      });
 
   const response  = await http.post(datadog_uri, data);
   const body = await response.readBody();
@@ -33,9 +51,9 @@ run();
 //     case "event":
 //       // code block
 //       const event_title = core.getInput("event_title");
-//       const event_text = core.getInput("event_text");
-//       const event_priority = core.getInput("event_priority");
-//       const event_tags = core.getInput("event_tags");
+// //       const event_text = core.getInput("event_text");
+// //       const event_priority = core.getInput("event_priority");
+// //       const event_tags = core.getInput("event_tags");
 //       const alert_type = core.getInput("alert_type");
 
 //       break;
