@@ -6,7 +6,7 @@ branding:
 inputs:
   datadog_api_key:
     description: api key
-    required: false
+    required: true
   parsley_environment:
     description: env description
     required: false
@@ -25,6 +25,30 @@ inputs:
     description: priority description
     required: false
     default: 'normal'
+  metric_name:
+    description: name
+    required: false
+    default: "com.parsleyhealth.cicd.deploy"
+  metric_value:
+    description: name
+    required: false
+    default: "com.parsleyhealth.cicd.deploy"
+  metric_type:
+    description: name
+    required: false
+    default: "com.parsleyhealth.cicd.deploy"
+  metric_interval:
+    description: name
+    required: false
+    default: "com.parsleyhealth.cicd.deploy"
+  metric_host:
+    description: name
+    required: false
+    default: "com.parsleyhealth.cicd.deploy"
+  metric_tags:
+    description: name
+    required: false
+    default: "com.parsleyhealth.cicd.deploy"
   alert_type:
     description: title description
     required: false
