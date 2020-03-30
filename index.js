@@ -1,6 +1,6 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
-const http = require('@actions/http-client');
+const httpm = require('@actions/http-client');
 
 try {
     // `who-to-greet` input defined in action metadata file
@@ -29,7 +29,7 @@ try {
             const metric_tags = core.getInput('metric_tags');
 
 
-            var datadog_metric_payload = { 'series': [{
+            var datadog_payload = { 'series': [{
                     'metric': 'com.parsleyhealth.cicd.test',
                     'points': [[current_time, metric_value ]],
                     'type':  metric_type,
@@ -38,10 +38,12 @@ try {
                     'tags': metric_tags
                 }]
             };
-            var content = JSON.stringify(datadog_metric_payload);
-  //          var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = http.post(datadog_uri, content);
-            core.setOutput("datadog_response", response);
+            (async () => {
+                let payload: any = datadog_metric_payload;
+                let response: ifm.ITypedResponse<HttpBinData> = await _http.postJson<HttpBinData>(datadog_uri, datadog_payload);
+
+
+            }
 
             break;
         default:

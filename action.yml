@@ -30,25 +30,25 @@ inputs:
     required: false
     default: "com.parsleyhealth.cicd.deploy"
   metric_value:
-    description: name
+    description: value
     required: false
-    default: "com.parsleyhealth.cicd.deploy"
+    default: 1
   metric_type:
-    description: name
+    description: type
     required: false
-    default: "com.parsleyhealth.cicd.deploy"
+    default: 'metric'
   metric_interval:
-    description: name
+    description: interval
     required: false
-    default: "com.parsleyhealth.cicd.deploy"
+    default: 20
   metric_host:
-    description: name
+    description: host
     required: false
-    default: "com.parsleyhealth.cicd.deploy"
+    default: "cicd.parsleyhealth.com"
   metric_tags:
     description: name
     required: false
-    default: "com.parsleyhealth.cicd.deploy"
+    default: []
   alert_type:
     description: title description
     required: false
