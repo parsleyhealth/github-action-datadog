@@ -10,10 +10,9 @@ const datadog_uri = "https://api.datadoghq.com/api/v1/series?api_key=" + datadog
 const current_time = (new Date()).toTimeString();
 
 async() => {
-    let additionalHeaders = {[httpm.Headers.Accept]: "foo"};
-    var jsonObj = await _http.postJson('https://httpbin.org/post', {}, additionalHeaders);
+    var jsonObj = await _http.postJson(datadog_uri, {}, {});
+    console.log(jsonObj)
 }
-
 
 // switch(core.getInput('datadog_type')) {
     //     case 'event':
