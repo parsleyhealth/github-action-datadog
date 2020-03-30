@@ -13,15 +13,15 @@ try {
 
     _http = new httpm.HttpClient('http-client-tests');
 
-    var response_promise = _http.get('http://httpbin.org/get');
+    var response_promise = _http.get(datadog_uri);
     //var response = res.resolve;
     var p1 = Promise.resolve(response_promise);
     p1.then(function(v) {
             console.log(v);
             var body = v.readBody();
-            var obj = JSON.parse(body);
+            // var obj = JSON.parse(body);
             const time = (new Date()).toTimeString();
-            core.setOutput("datadog_response", obj);
+            core.setOutput("datadog_response", body);
         }, function(e) {
         // not called
     });
