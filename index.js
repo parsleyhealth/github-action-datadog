@@ -18,7 +18,7 @@ try {
     var p1 = Promise.resolve(response_promise);
     p1.then(function(v) {
             console.log(v);
-            var body = v.readBody());
+            var body = v.readBody();
             var obj = JSON.parse(body);
             const time = (new Date()).toTimeString();
             core.setOutput("datadog_response", obj);
