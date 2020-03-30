@@ -14,6 +14,12 @@ try {
 
     var response_promise = _http.get('http://httpbin.org/get');
     //var response = res.resolve;
+    var p1 = Promise.resolve(response_promise);
+    p1.then(function(v) {
+        console.log(v); // "fulfilled!"
+    }, function(e) {
+        // not called
+    });
 
     response_promise.then(function(value) {
    //     console.log('value: ' + value.readBody());
