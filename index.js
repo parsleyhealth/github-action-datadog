@@ -12,12 +12,14 @@ try {
 
     _http = new httpm.HttpClient('http-client-tests');
 
-    var res = _http.get('http://httpbin.org/get');
-    var response = res.resolve;
+    var response_promise = _http.get('http://httpbin.org/get');
+    //var response = res.resolve;
 
+
+    var response = Promise.resolve(response_promise);
+    console.log(response);
 
     var body = response.readBody();
-    console.log(body);
 
     var obj = JSON.parse(body);
     const time = (new Date()).toTimeString();
