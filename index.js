@@ -8,11 +8,8 @@ const http = require('@actions/http-client');
     const parsley_componentname = core.getInput('parsley_componentname');
     const datadog_uri = "https://api.datadoghq.com/api/v1/series?api_key=" + datadog_api_key
     const current_time = (new Date()).toTimeString();
-    const keepAliveAgent = new http.Agent({ keepAlive: true });
 
 
-
-    //
     // switch(core.getInput('datadog_type')) {
     //     case 'event':
     //         // code block
