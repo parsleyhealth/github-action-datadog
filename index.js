@@ -40,7 +40,7 @@ try {
             };
 
             (async () => {
-                let response: ifm.ITypedResponse<HttpBinData> = await _http.postJson<HttpBinData>(datadog_uri, datadog_payload);
+                let response = await _http.postJson(datadog_uri, datadog_payload);
 
             }
 
