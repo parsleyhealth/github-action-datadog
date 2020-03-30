@@ -28,7 +28,7 @@ try {
         data: postData
     };
 
-    const req = http. (options, (res) => {
+    const req = http.get(options, (res) => {
         console.log(`STATUS: ${res.statusCode}`);
         console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
         res.setEncoding('utf8');
