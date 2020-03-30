@@ -39,14 +39,10 @@ try {
                 }]
             };
 
-            (async () => {
-                let response = await _http.postJson(datadog_uri, datadog_payload);
-                console.log(`response ${response}`)
-            }
 
+            var response = http.postJson(datadog_uri, datadog_payload);
+            console.log(`response ${response}`)
 
-        default:
-            console.log(`incorrect metric type provided`)
 
         // code block
     }
