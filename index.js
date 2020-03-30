@@ -11,13 +11,14 @@ try {
     const datadog_uri = "https://api.datadoghq.com/api/v1/series?api_key=" + datadog_api_key
     const current_time = (new Date()).toTimeString();
     const keepAliveAgent = new http.Agent({ keepAlive: true });
-    options.agent = keepAliveAgent;
+
     const postData = querystring.stringify({
         'msg': 'Hello World!'
     });
 
     const options = {
         hostname: 'www.google.com',
+        agent: keepAliveAgent,
         port: 80,
         path: '/upload',
         method: 'POST',
