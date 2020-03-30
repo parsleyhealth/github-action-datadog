@@ -24,7 +24,7 @@ const run = async () => {
             metric: metric_name,
             points: [[current_time, metric_value]],
             type: metric_type,
-            interval: metric_interval,
+            interval: 20,
             host: metric_host,
             tags: metric_tags
           }
