@@ -10,6 +10,18 @@ try {
     const current_time = (new Date()).toTimeString();
 
     console.log(`Hello ${datadog_uri}!`);
+    _http = new httpm.HttpClient('http-client-tests');
+
+     async(done) => {
+        let res: httpm.HttpClientResponse = await _http.get('http://httpbin.org/get');
+        expect(res.message.statusCode).toBe(200);
+        let body: string = await res.readBody();
+        let obj: any = JSON.parse(body);
+        expect(obj.url).toBe("http://httpbin.org/get");
+        expect(obj.headers["User-Agent"]).toBeTruthy();
+        done();
+    }
+
     const time = (new Date()).toTimeString();
     core.setOutput("time", time);
     // Get the JSON webhook payload for the event that triggered the workflow
