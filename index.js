@@ -10,16 +10,14 @@ try {
     const datadog_uri = "https://api.datadoghq.com/api/v1/series?api_key=" + datadog_api_key
     const current_time = (new Date()).toTimeString();
 
-    console.log(`Hello ${datadog_uri}!`);
     _http = new httpm.HttpClient('http-client-tests');
 
      async(done) => {
         var res = await _http.get('http://httpbin.org/get');
-        expect(res.message.statusCode).toBe(200);
         var body = await res.readBody();
         var obj = JSON.parse(body);
-        expect(obj.url).toBe("http://httpbin.org/get");
-        expect(obj.headers["User-Agent"]).toBeTruthy();
+        console.log(`Hi ${obj}`);
+
         done();
     }
 
