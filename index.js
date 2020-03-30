@@ -14,7 +14,7 @@ try {
     _http = new httpm.HttpClient('http-client-tests');
 
      async(done) => {
-        var res = httpm.HttpClientResponse = await _http.get('http://httpbin.org/get');
+        var res = await _http.get('http://httpbin.org/get');
         expect(res.message.statusCode).toBe(200);
         var body = await res.readBody();
         var obj = JSON.parse(body);
