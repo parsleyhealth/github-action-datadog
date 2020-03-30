@@ -11,10 +11,10 @@ const run = async () => {
 
   const http = new httpm.HttpClient("http-client-tests");
   let res =  { name: 'foo' };
-  var response  = await http.postJson('https://httpbin.org/post', res);
+  const response  = await http.postJson('https://httpbin.org/post', res);
 //  const googleUri = "https://api.parsleyhealth.com/ping";
  // const res = await http.get(googleUri);
-  const body = await response.readBody();
+  const body = response.readBody();
   core.debug(body);
 };
 
