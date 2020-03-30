@@ -13,7 +13,7 @@ const run = async () => {
   const http = new httpm.HttpClient("http-client-tests");
   let data =  JSON.stringify({ name: 'foo' });
 
-  const response  = await http.post(datadog_, data);
+  const response  = await http.post(datadog_uri, data);
   const body = await response.readBody();
   core.debug(body);
 };
