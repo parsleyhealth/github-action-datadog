@@ -10,16 +10,18 @@ try {
     const datadog_uri = "https://api.datadoghq.com/api/v1/series?api_key=" + datadog_api_key
     const current_time = (new Date()).toTimeString();
 
+
     _http = new httpm.HttpClient('http-client-tests');
 
     var response_promise = _http.get('http://httpbin.org/get');
     //var response = res.resolve;
     var p1 = Promise.resolve(response_promise);
     p1.then(function(v) {
-        console.log(v);
-
-
-
+            console.log(v);
+            var body = v.readBody());
+            var obj = JSON.parse(body);
+            const time = (new Date()).toTimeString();
+            core.setOutput("datadog_response", obj);
         }, function(e) {
         // not called
     });
