@@ -12,14 +12,14 @@ try {
 
     _http = new httpm.HttpClient('http-client-tests');
 
-     async(done) => {
-        var res = await _http.get('http://httpbin.org/get');
-        var body = await res.readBody();
-        var obj = JSON.parse(body);
-        const time = (new Date()).toTimeString();
-        core.setOutput("datadog_response", obj);
-        done();
-    }
+
+    var res = _http.get('http://httpbin.org/get');
+    var body = res.readBody();
+    var obj = JSON.parse(body);
+    const time = (new Date()).toTimeString();
+    core.setOutput("datadog_response", obj);
+
+
     console.log(`Hi ${obj}`);
 
 
