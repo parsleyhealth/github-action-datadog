@@ -7,40 +7,52 @@ try {
     const datadog_api_key = core.getInput('datadog_api_key');
     const parsley_environment = core.getInput('parsley_environment');
     const parsley_componentname = core.getInput('parsley_componentname');
-    const datadog_type = core.getInput('datadog_type');
-
-    const event_title = core.getInput('event_title');
-    const event_text = core.getInput('event_text');
-    const event_priority = core.getInput('event_priority');
-    const alert_type = core.getInput('alert_type');
     const datadog_uri = "https://api.datadoghq.com/api/v1/series?api_key=" + datadog_api_key
+    const current_time = (new Date()).toTimeString();
+
+    switch(core.getInput('datadog_type')) {
+        case 'event':
+            // code block
+            const event_title = core.getInput('event_title');
+            const event_text = core.getInput('event_text');
+            const event_priority = core.getInput('event_priority');
+            const event_tags = core.getInput('event_tags');
+            const alert_type = core.getInput('alert_type');
+
+            break;
+        case 'metric':
+            const metric_name = core.getInput('metric_name');
+            const metric_value = core.getInput('metric_value');
+            const metric_type = core.getInput('metric_type');
+            const metric_interval = core.getInput('metric_interval');
+            const metric_host = core.getInput('metric_host');
+            const metric_tags = core.getInput('metric_tags');
+
+
+            var datadog_metric_payload = { 'series': [{
+                    'metric': 'com.parsleyhealth.cicd.test',
+                    'points': [[current_time, metric_value ]],
+                    'type':  metric_type,
+                    'interval': metric_interval,
+                    'host': metric_host,
+                    'tags': metric_tags
+                }]
+            };
+
+            var json = JsonConvert.SerializeObject(datadog_metric_payload);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = http.post(datadog_uri, content);
+            core.setOutput("datadog_response", response);
+
+            break;
+        default:
+        // code block
+    }
 
     console.log(`Hello  ${datadog_api_key} ${parsley_componentname}   ${parsley_environment}  ${event_title} ${event_text} ${event_priority} ${alert_type} `);
-    const time = (new Date()).toTimeString();
-    core.setOutput("datadog_response", datadog_api_key);
-    // Get the JSON webhook payload for the event that triggered the workflow
-    // const payload = JSON.stringify(github.context.payload, undefined, 2)
-    var datadog_payload = {
-                                    'metric': 'bar'
-                            };
+
     console.log(`The event payload: ${payload}`);
 
-    var json = JsonConvert.SerializeObject(datadog_payload);
-
-    //aqui el json lo convertimos a lo que el metodo Post esta esperando
-    // Indicando el tipo de Encoding y tambien el tipo de contenido que estamos enviando
-    var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-    //nombre_del_script.php lo vas a cambiar con el nombre de tu script PHP
-    // var response = await client.PostAsync("http://ruta_completa_de_tu_script.php", content);
-    var res = http.post(datadog_uri, content);
-
-    // expect(res.message.statusCode).toBe(200);
-    // let body = res.readBody();
-    // let obj = JSON.parse(body);
-    // expect(obj.data).toBe(b);
-    // expect(obj.url).toBe("http://httpbin.org/post");
-    // done();
 
 } catch (error) {
     core.setFailed(error.message);
