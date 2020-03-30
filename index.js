@@ -11,7 +11,7 @@ const run = async () => {
 
   const http = new httpm.HttpClient("http-client-tests");
   let data =  { name: 'foo' };
-  const response  = await http.postJson('https://httpbin.org/post', data);
+  const response  = await http.get('https://httpbin.org/post');
   const body = await response.readBody();
   core.debug(body);
 };
