@@ -1,6 +1,7 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
-const http = require('@actions/http-client');
+const http = require('http');
+
 
 try {
     // `who-to-greet` input defined in action metadata file
@@ -9,6 +10,42 @@ try {
     const parsley_componentname = core.getInput('parsley_componentname');
     const datadog_uri = "https://api.datadoghq.com/api/v1/series?api_key=" + datadog_api_key
     const current_time = (new Date()).toTimeString();
+    const keepAliveAgent = new http.Agent({ keepAlive: true });
+    options.agent = keepAliveAgent;
+    const postData = querystring.stringify({
+        'msg': 'Hello World!'
+    });
+
+    const options = {
+        hostname: 'www.google.com',
+        port: 80,
+        path: '/upload',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Length': Buffer.byteLength(postData)
+        }
+    };
+
+    const req = http.request(options, (res) => {
+        console.log(`STATUS: ${res.statusCode}`);
+        console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
+        res.setEncoding('utf8');
+        res.on('data', (chunk) => {
+            console.log(`BODY: ${chunk}`);
+        });
+        res.on('end', () => {
+            console.log('No more data in response.');
+        });
+    });
+
+    req.on('error', (e) => {
+        console.error(`problem with request: ${e.message}`);
+    });
+
+// Write data to request body
+    req.write(postData);
+    req.end();
 
     switch(core.getInput('datadog_type')) {
         case 'event':
