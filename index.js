@@ -15,8 +15,17 @@ try {
     var response_promise = _http.get('http://httpbin.org/get');
     //var response = res.resolve;
 
+    response_promise.then(function(value) {
+        console.log('value: ' + value);
+
+    });
+
 
     var response = Promise.resolve(response_promise);
+
+
+
+
     console.log(response);
 
     var body = response.readBody();
