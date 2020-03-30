@@ -1,5 +1,6 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
+const httpm = require('@actions/http-client');
 
 try {
     // `who-to-greet` input defined in action metadata file
