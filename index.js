@@ -1,12 +1,12 @@
 const core = require('@actions/core');
 const http = require('httpie');
-import { get, post } from 'httpie';
-
+async (); {
 try {
-    const { data } = await get('https://pokeapi.co/api/v2/pokemon/1');
+
+
 
     // Demo: Endpoint will echo what we've sent
-    const res = await post('https://jsonplaceholder.typicode.com/posts', {
+    const res =  httpie.post('https://jsonplaceholder.typicode.com/posts', {
         body: {
             id: data.id,
             name: data.name,
@@ -64,6 +64,7 @@ try {
         console.error(`problem with request: ${e.message}`);
     });
 
+
 // Write data to request body
     req.write(postData);
     req.end();
@@ -117,7 +118,7 @@ try {
     core.setFailed(error.message);
 }
 
-
+}
 // current_time=`date +%s`
 // METRIC_JSON="{ \"series\":  [{ \"metric\":\"${METRIC_NAME}\",
 //                               \"points\":[[$current_time,${METRIC_VALUE}]],
