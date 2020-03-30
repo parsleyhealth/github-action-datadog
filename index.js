@@ -1,16 +1,21 @@
 const core = require('@actions/core');
-const http = require('@actions/http-client');
+const httpm = require('@actions/http-client');
 
 
-    // `who-to-greet` input defined in action metadata file
-    const datadog_api_key = core.getInput('datadog_api_key');
-    const parsley_environment = core.getInput('parsley_environment');
-    const parsley_componentname = core.getInput('parsley_componentname');
-    const datadog_uri = "https://api.datadoghq.com/api/v1/series?api_key=" + datadog_api_key
-    const current_time = (new Date()).toTimeString();
+// `who-to-greet` input defined in action metadata file
+const datadog_api_key = core.getInput('datadog_api_key');
+const parsley_environment = core.getInput('parsley_environment');
+const parsley_componentname = core.getInput('parsley_componentname');
+const datadog_uri = "https://api.datadoghq.com/api/v1/series?api_key=" + datadog_api_key
+const current_time = (new Date()).toTimeString();
+
+async() => {
+    let additionalHeaders = {[httpm.Headers.Accept]: "foo"};
+    var jsonObj = await _http.postJson('https://httpbin.org/post', {}, additionalHeaders);
+}
 
 
-    // switch(core.getInput('datadog_type')) {
+// switch(core.getInput('datadog_type')) {
     //     case 'event':
     //         // code block
     //         const event_title = core.getInput('event_title');
