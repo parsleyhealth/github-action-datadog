@@ -16,11 +16,11 @@ try {
         var res = await _http.get('http://httpbin.org/get');
         var body = await res.readBody();
         var obj = JSON.parse(body);
-        console.log(`Hi ${obj}`);
         const time = (new Date()).toTimeString();
         core.setOutput("datadog_response", obj);
         done();
     }
+    console.log(`Hi ${obj}`);
 
 
     // Get the JSON webhook payload for the event that triggered the workflow
