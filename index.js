@@ -16,20 +16,23 @@ try {
     //var response = res.resolve;
     var p1 = Promise.resolve(response_promise);
     p1.then(function(v) {
-        console.log(v); // "fulfilled!"
-    }, function(e) {
+        console.log(v);
+
+
+
+        }, function(e) {
         // not called
     });
 
-    response_promise.then(function(value) {
-   //     console.log('value: ' + value.readBody());
-        var response = Promise.resolve(value);
-
-        console.log(response.readBody())
-
-        console.log(JSON.stringify(value))
-
-    });
+   //  response_promise.then(function(value) {
+   // //     console.log('value: ' + value.readBody());
+   //      var response = Promise.resolve(value);
+   //
+   //      console.log(response.readBody())
+   //
+   //      console.log(JSON.stringify(value))
+   //
+   //  });
 
 
 
