@@ -38,8 +38,7 @@ try {
                     'tags': metric_tags
                 }]
             };
-
-            var json = JsonConvert.SerializeObject(datadog_metric_payload);
+            var json = JSON.stringify(datadog_metric_payload);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             var response = http.post(datadog_uri, content);
             core.setOutput("datadog_response", response);
