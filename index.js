@@ -1,29 +1,7 @@
 const core = require('@actions/core');
-const http = require('httpie');
-async (); {
-try {
+const http = require('@actions/http-client');
 
 
-
-    // Demo: Endpoint will echo what we've sent
-    const res =  httpie.post('https://jsonplaceholder.typicode.com/posts', {
-        body: {
-            id: data.id,
-            name: data.name,
-            number: data.order,
-            moves: data.moves.slice(0, 6)
-        }
-    });
-
-    console.log(res.statusCode); //=> 201
-    console.log(res.data); //=> { id: 1, name: 'bulbasaur', number: 1, moves: [{...}, {...}] }
-} catch (err) {
-    console.error('Error!', err.statusCode, err.message);
-    console.error('~> headers:', err.headers);
-    console.error('~> data:', err.data);
-}
-
-try {
     // `who-to-greet` input defined in action metadata file
     const datadog_api_key = core.getInput('datadog_api_key');
     const parsley_environment = core.getInput('parsley_environment');
@@ -32,43 +10,8 @@ try {
     const current_time = (new Date()).toTimeString();
     const keepAliveAgent = new http.Agent({ keepAlive: true });
 
-    const postData =  JSON.stringify({
-        'msg': 'Hello World!'
-    });
-
-    const options = {
-        hostname: 'api.datadoghq.com',
-        agent: keepAliveAgent,
-        port: 80,
-        path: '/api/v1/series?api_key=' + datadog_api_key,
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Content-Length': Buffer.byteLength(postData)
-        },
-        data: postData
-    };
-
-    const req = http.get(options, (res) => {
-        console.log(`STATUS: ${res.statusCode}`);
-        console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
-        res.setEncoding('utf8');
-        res.on('data', (chunk) => {
-            console.log(`BODY: ${chunk}`);
-        });
-        res.on('end', () => {
-            console.log('No more data in response.');
-        });
-    });
-
-    req.on('error', (e) => {
-        console.error(`problem with request: ${e.message}`);
-    });
 
 
-// Write data to request body
-    req.write(postData);
-    req.end();
     //
     // switch(core.getInput('datadog_type')) {
     //     case 'event':
@@ -115,11 +58,7 @@ try {
     // console.log(`The event payload: ${payload}`);
     //
 
-} catch (error) {
-    core.setFailed(error.message);
-}
 
-}
 // current_time=`date +%s`
 // METRIC_JSON="{ \"series\":  [{ \"metric\":\"${METRIC_NAME}\",
 //                               \"points\":[[$current_time,${METRIC_VALUE}]],
