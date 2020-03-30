@@ -38,10 +38,13 @@ try {
                     'tags': metric_tags
                 }]
             };
-
-
-            var response = http.post(datadog_uri, datadog_payload);
-            console.log(`response ${response}`)
+            request.queryParams.datadog_api_key = datadog_api_key
+            response.content = '';
+            response.headers['Content-Type'] = 'application/json';
+            resp = httpClient.post(datadog_uri, datadog_payload);
+            var body = resp.content.asJSON;
+           // var response =
+            console.log(`response ${body}`)
 
 
         // code block
