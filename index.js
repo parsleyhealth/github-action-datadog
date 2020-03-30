@@ -21,6 +21,7 @@ try {
     console.error('Error!', err.statusCode, err.message);
     console.error('~> headers:', err.headers);
     console.error('~> data:', err.data);
+}
 
 try {
     // `who-to-greet` input defined in action metadata file
