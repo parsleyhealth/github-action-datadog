@@ -37,22 +37,22 @@ try {
 
 
 
-
-
-    console.log(response);
-
-    var body = response.readBody();
-
-    var obj = JSON.parse(body);
-    const time = (new Date()).toTimeString();
-    core.setOutput("datadog_response", obj);
-
-
-    console.log(`Hi ${obj}`);
+    //
+    //
+    // console.log(response);
+    //
+    // var body = response.readBody();
+    //
+    // var obj = JSON.parse(body);
+    // const time = (new Date()).toTimeString();
+    // core.setOutput("datadog_response", obj);
+    //
+    //
+    // console.log(`Hi ${obj}`);
 
 
     // Get the JSON webhook payload for the event that triggered the workflow
-    const payload = JSON.stringify(github.context.payload, undefined, 2)
+    // const payload = JSON.stringify(github.context.payload, undefined, 2)
 } catch (error) {
     core.setFailed(error.message);
 }
