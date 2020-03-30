@@ -11,8 +11,7 @@ const run = async () => {
   const metric_interval = core.getInput("metric_interval");
   const metric_host = core.getInput("metric_host");
   const metric_tags = core.getInput("metric_tags");
-  const current_time = new Date().toTimeString();
-
+  const current_time = Math.round((new Date()).getTime() / 1000);
   core.debug("debugging debug");
 
   core.debug(`datadog_api_key: ${datadog_api_key}`);
