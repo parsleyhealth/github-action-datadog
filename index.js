@@ -18,6 +18,7 @@ const run = async () => {
   core.debug(`datadog_api_key: ${datadog_api_key}`);
 
   const http = new httpm.HttpClient("http-client-tests");
+
   let datadog_metric_payload = JSON.stringify({
         series: [
           {
@@ -31,7 +32,7 @@ const run = async () => {
         ]
       });
 
-  const response  = await http.post(datadog_uri, data);
+  const response  = await http.post(datadog_uri, datadog_metric_payload);
   const body = await response.readBody();
   core.debug(body);
 };
