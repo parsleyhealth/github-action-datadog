@@ -1,84 +1,15 @@
 const core = require('@actions/core');
-const httpm = require('@actions/http-client');
+const github = require('@actions/github');
 
-
-// `who-to-greet` input defined in action metadata file
-const datadog_api_key = core.getInput('datadog_api_key');
-const parsley_environment = core.getInput('parsley_environment');
-const parsley_componentname = core.getInput('parsley_componentname');
-const datadog_uri = "https://api.datadoghq.com/api/v1/series?api_key=" + datadog_api_key
-const current_time = (new Date()).toTimeString();
-
-async function run() {
-    try {
-        const ms = core.getInput('metric_value');
-        console.log(`Waiting ${ms} milliseconds ...`)
-        var jsonObj = httpm.HttpClient.get(datadog_uri, {}, {});
-        console.log(`${jsonObj}`)
-        core.setOutput("datadog_response", "testing");
-    } catch (e) {
-
-    }
+try {
+    // `who-to-greet` input defined in action metadata file
+    const nameToGreet = core.getInput('datadog_api_key');
+    console.log(`Hello ${nameToGreet}!`);
+    const time = (new Date()).toTimeString();
+    core.setOutput("time", time);
+    // Get the JSON webhook payload for the event that triggered the workflow
+    const payload = JSON.stringify(github.context.payload, undefined, 2)
+    console.log(`The event payload: ${payload}`);
+} catch (error) {
+    core.setFailed(error.message);
 }
-
-
-// switch(core.getInput('datadog_type')) {
-    //     case 'event':
-    //         // code block
-    //         const event_title = core.getInput('event_title');
-    //         const event_text = core.getInput('event_text');
-    //         const event_priority = core.getInput('event_priority');
-    //         const event_tags = core.getInput('event_tags');
-    //         const alert_type = core.getInput('alert_type');
-    //
-    //         break;
-    //     case 'metric':
-    //         const metric_name = core.getInput('metric_name');
-    //         const metric_value = core.getInput('metric_value');
-    //         const metric_type = core.getInput('metric_type');
-    //         const metric_interval = core.getInput('metric_interval');
-    //         const metric_host = core.getInput('metric_host');
-    //         const metric_tags = core.getInput('metric_tags');
-    //
-    //
-    //         var datadog_payload = { 'series': [{
-    //                 'metric': metric_name,
-    //                 'points': [[current_time, metric_value]],
-    //                 'type':  metric_type,
-    //                 'interval': metric_interval,
-    //                 'host': metric_host,
-    //                 'tags': metric_tags
-    //             }]
-    //         };
-    //         request.queryParams.datadog_api_key = datadog_api_key
-    //         response.content = '';
-    //         response.headers['Content-Type'] = 'application/json';
-    //         resp = httpClient.post(datadog_uri, datadog_payload);
-    //         var body = resp.content.asJSON;
-    //        // var response =
-    //         console.log(`response ${body}`)
-    //
-    //
-    //     // code block
-    // }
-    //
-    // console.log(`Hello  ${datadog_api_key} ${parsley_componentname}   ${parsley_environment}  ${event_title} ${event_text} ${event_priority} ${alert_type} `);
-    //
-    // console.log(`The event payload: ${payload}`);
-    //
-
-
-// current_time=`date +%s`
-// METRIC_JSON="{ \"series\":  [{ \"metric\":\"${METRIC_NAME}\",
-//                               \"points\":[[$current_time,${METRIC_VALUE}]],
-//                               \"type\":\"${METRIC_TYPE}\",
-//                               \"interval\": ${METRIC_INTERVAL},
-//                               \"host\":\"${METRIC_HOST}\",
-//                               \"tags\": ${METRIC_TAGS}
-// }]
-// }"
-//
-// DATADOG_URL="https://api.datadoghq.com/api/v1/series?api_key=${DATADOG_API_KEY}"
-// curl  -X POST -H "Content-type: application/json" -d "$METRIC_JSON" "$DATADOG_URL"
-//
-
