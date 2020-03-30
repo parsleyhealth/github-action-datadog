@@ -17,9 +17,11 @@ try {
     //var response = res.resolve;
     var p1 = Promise.resolve(response_promise);
     p1.then(function(v) {
-            console.log(v);
+
             var body = v.readBody();
-            // var obj = JSON.parse(body);
+            console.log(body)
+
+        // var obj = JSON.parse(body);
             const time = (new Date()).toTimeString();
             core.setOutput("datadog_response", body);
         }, function(e) {
@@ -30,7 +32,6 @@ try {
    // //     console.log('value: ' + value.readBody());
    //      var response = Promise.resolve(value);
    //
-   //      console.log(response.readBody())
    //
    //      console.log(JSON.stringify(value))
    //
