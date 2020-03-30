@@ -17,11 +17,15 @@ try {
 
     response_promise.then(function(value) {
    //     console.log('value: ' + value.readBody());
+        var response = Promise.resolve(value);
+
+        console.log(response.readBody())
+
         console.log(JSON.stringify(value))
+
     });
 
 
-    var response = Promise.resolve(response_promise);
 
 
 
