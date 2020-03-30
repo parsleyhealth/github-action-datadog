@@ -17,15 +17,14 @@ try {
         var body = await res.readBody();
         var obj = JSON.parse(body);
         console.log(`Hi ${obj}`);
-
+        const time = (new Date()).toTimeString();
+        core.setOutput("datadog_response", obj);
         done();
     }
 
-    const time = (new Date()).toTimeString();
-    core.setOutput("time", time);
+
     // Get the JSON webhook payload for the event that triggered the workflow
     const payload = JSON.stringify(github.context.payload, undefined, 2)
-    console.log(`The event payload: ${payload}`);
 } catch (error) {
     core.setFailed(error.message);
 }
