@@ -11,8 +11,8 @@
     "url": "git+https://github.com/parsleyhealth/github-action-datadog.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "David Andersen <david.andersen@parsleyhealth.com>",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/parsleyhealth/github-action-datadog/issues"
   },
