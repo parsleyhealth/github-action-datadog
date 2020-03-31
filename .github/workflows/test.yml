@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - master
-      - testaction
+      - feature/add
 
 jobs:
   test:
