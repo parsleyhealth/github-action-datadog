@@ -34,12 +34,12 @@ const run = async () => {
     const http = new httpm.HttpClient("http-client-tests");
 
     const parsley_tags = [
-        "environment:" + parsley_environment + " ",
-        "componentname:" + parsley_componentname + " ",
-        "reponame:" + reponame + " ",
-        "branchname:" + branchname + " ",
-        "gitsha:" + gitsha + " ",
-        "gitauthor:" + gitauthor + " "
+        "environment:" + parsley_environment,
+        "componentname:" + parsley_componentname,
+        "reponame:" + reponame,
+        "branchname:" + branchname,
+        "gitsha:" + gitsha,
+        "gitauthor:" + gitauthor
     ]
 
     let datadog_metric_payload = JSON.stringify({
