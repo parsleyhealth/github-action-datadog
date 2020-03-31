@@ -21,7 +21,7 @@ const run = async () => {
     const head_commit_timestamp = Date.parse(payload.head_commit['timestamp']);
     const last_commit_timestamp = Math.round(head_commit_timestamp / 1000);
     core.debug("debug")
-    core.debug(current_time -  last_commit_timestamp);
+    core.debug(current_time + " " + last_commit_timestamp);
 
     const event_title = "Deploy event for " + parsley_componentname + " in env: " + parsley_environment;
     const event_text = "Deploy event for " + parsley_componentname + " in env: " + parsley_environment;
