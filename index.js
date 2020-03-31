@@ -16,9 +16,8 @@ const run = async () => {
     const current_time = parseInt(Math.round((new Date()).getTime() / 1000));
     const reponame = payload.repository.full_name;
     const ref_path = payload.ref;
-
     const branchname = ref_path.split('/').pop();
-    const gitsha = payload.after; // confirm
+    const gitsha = payload.after; // confirm this is correct.
     const gitauthor = payload.commits[0]['author']['username'];
     const head_commit_timestamp = Date.parse(payload.head_commit['timestamp']);
     const last_commit_epoch = parseInt(Math.round(head_commit_timestamp / 1000));
@@ -40,28 +39,28 @@ const run = async () => {
     ];
 
     let datadog_lead_time_metric_payload = JSON.stringify({
-      series: [
-        {
-          metric: "com.parsleyhealth.cicd.deploy_lead_time",
-          points: [[current_time, lead_time]],
-          type: "count",
-          interval: 20,
-          host: "cicd.parsleyhealth.com",
-          tags: parsley_tags
-        }
-      ]
+            series: [
+            {
+              metric: "com.parsleyhealth.cicd.deploy_lead_time",
+              points: [[current_time, lead_time]],
+              type: "count",
+              interval: 20,
+              host: "cicd.parsleyhealth.com",
+              tags: parsley_tags
+            }
+            ]
     });
     let datadog_metric_payload = JSON.stringify({
-        series: [
-            {
-                metric: "com.parsleyhealth.cicd.deploy",
-                points: [[current_time, 1]],
-                type: "count",
-                interval: 20,
-                host: "cicd.parsleyhealth.com",
-                tags: parsley_tags
-            }
-        ]
+            series: [
+                {
+                    metric: "com.parsleyhealth.cicd.deploy",
+                    points: [[current_time, 1]],
+                    type: "count",
+                    interval: 20,
+                    host: "cicd.parsleyhealth.com",
+                    tags: parsley_tags
+                }
+            ]
     });
 
     let datadog_event_payload = JSON.stringify({
