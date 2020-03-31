@@ -1,21 +1,40 @@
 # Hello world javascript action
 
-This action prints "Hello World" or "Hello" + the name of a person to greet to the log.
+This action reports Parsleyhealth cicd metrics and events to datadog
 
 ## Inputs
 
-### `who-to-greet`
 
-**Required** The name of the person to greet. Default `"World"`.
+### `datadog_api_key`: ${{ secrets.DATADOG_API_KEY_STAGING }}
+**Required** The name of the datadog api key`.
+
+### `parsley_componentname`: cicd
+**Required** The name of the parsley componentname`.
+
+### `parsley_environment`: "staging"
+**Required** The name of the parsley environment.
 
 ## Outputs
 
-### `time`
+### `datadog_response`
 
-The time we greeted you.
+Datadog respone
 
 ## Example usage
 
-uses: actions/hello-world-javascript-action@v1
-with:
-  who-to-greet: 'Mona the Octocat'
+```
+on: [push]
+
+jobs:
+  deploy_job:
+    runs-on: ubuntu-latest
+    name: A test datadog
+    steps:
+      - name: github_action_datadog
+        id: hello
+        uses: parsleyhealth/github-action-datadog@v1
+        with:
+          datadog_api_key: ${{ secrets.DATADOG_API_KEY_STAGING }}
+          parsley_componentname: cicd
+          parsley_environment: "staging"
+```
