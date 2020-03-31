@@ -12,6 +12,6 @@ jobs:
       - uses: actions/checkout@v1
       - uses: ./
         with:
-          datadog_api_key:  ${{ secrets.DATADOG_API_KEY_STAGING }}
-          parsley_componentname: cicd
-          parsley_environment: "staging"
+          datadog-api-key:  ${{ secrets.DATADOG_API_KEY_STAGING }}
+          parsley-componentname: cicd
+          parsley-environment: "staging"
