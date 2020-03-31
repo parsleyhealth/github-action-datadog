@@ -22,7 +22,7 @@ const run = async () => {
     const last_commit_epoch = parseInt(Math.round(head_commit_timestamp / 1000));
     core.debug("debug")
     core.debug(current_time + " " + last_commit_epoch);
-    var lead_time = current_time - last_commit_epoch;
+    var lead_time = await (current_time - last_commit_epoch);
     core.debug(lead_time);
     const event_title = "Deploy event for " + parsley_componentname + " in env: " + parsley_environment;
     const event_text = "Deploy event for " + parsley_componentname + " in env: " + parsley_environment;
