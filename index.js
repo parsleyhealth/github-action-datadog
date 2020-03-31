@@ -80,8 +80,12 @@ const run = async () => {
     var response = await http.post(datadog_event_uri, datadog_event_payload);
     var body3 = await response.readBody();
     core.debug(body3);
-
-    core.setOutput("datadog_response", [body1, body2, body3])
+    var output = {
+            datadog_deploy_metric: body1,
+            datadog_lead_time_metric: body2,
+            datadog_deploy_event: body3
+    }
+    core.setOutput("datadog_response", output)
 };
 
 run();
