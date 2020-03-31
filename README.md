@@ -6,10 +6,10 @@ This action reports Parsleyhealth cicd metrics and events to datadog
 
 
 ### `datadog_api_key`: ${{ secrets.DATADOG_API_KEY_STAGING }}
-**Required** The name of the datadog api key`.
+**Required** The name of the datadog api key.
 
 ### `parsley_componentname`: cicd
-**Required** The name of the parsley componentname`.
+**Required** The name of the parsley componentname.
 
 ### `parsley_environment`: "staging"
 **Required** The name of the parsley environment.
