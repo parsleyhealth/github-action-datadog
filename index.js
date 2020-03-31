@@ -16,7 +16,7 @@ const run = async () => {
     const reponame = payload.repository.full_name;
     const ref_path = payload.ref;
     const branchname = ref_path.split('/').pop();
-    const gitsha = payload.after; // confirm this is correct.
+    const gitsha = payload.after;
     const gitauthor = payload.commits[0]['author']['username'];
     const head_commit_timestamp = Date.parse(payload.head_commit['timestamp']);
     const last_commit_epoch = parseInt(Math.round(head_commit_timestamp / 1000));
