@@ -19,7 +19,7 @@ const run = async () => {
     const current_time = Math.round((new Date()).getTime() / 1000);
     const reponame = payload.full_name;
     const ref_path = payload.ref;
-
+    core.debug(payload);
     const branchname = ref_path.split("/").pop();
     const gitsha = payload.after // confirm
     const gitauthor = payload.commits[0]['author']['username']
@@ -38,8 +38,8 @@ const run = async () => {
         "componentname:" + parsley_componentname + " ",
         "reponame:" + reponame + " ",
         "branchname:" + branchname + " ",
-        "gitsha" + gitsha + " ",
-        "gitauthor" + gitauthor + " "
+        "gitsha:" + gitsha + " ",
+        "gitauthor:" + gitauthor + " "
     ]
 
     let datadog_metric_payload = JSON.stringify({
