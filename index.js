@@ -43,6 +43,7 @@ const run = async () => {
               metric: "com.parsleyhealth.cicd.deploy_lead_time",
               points: [[current_time, lead_time]],
               type: "count",
+              unit: "seconds",
               interval: 20,
               host: "cicd.parsleyhealth.com",
               tags: parsley_tags
@@ -55,6 +56,7 @@ const run = async () => {
                     metric: "com.parsleyhealth.cicd.deploy",
                     points: [[current_time, 1]],
                     type: "count",
+                    unit: "boolean",
                     interval: 20,
                     host: "cicd.parsleyhealth.com",
                     tags: parsley_tags
