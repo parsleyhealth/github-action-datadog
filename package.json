@@ -1,0 +1,25 @@
+{
+  "name": "github-action-datadog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/parsleyhealth/github-action-datadog.git"
+  },
+  "keywords": [],
+  "author": "David Andersen <david.andersen@parsleyhealth.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/parsleyhealth/github-action-datadog/issues"
+  },
+  "homepage": "https://github.com/parsleyhealth/github-action-datadog#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.3",
+    "@actions/github": "^2.1.1",
+    "@actions/http-client": "^1.0.6"
+  }
+}

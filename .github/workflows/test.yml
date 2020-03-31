@@ -1,0 +1,17 @@
+name: "test-local"
+on:
+  push:
+    branches:
+      - master
+      - feature/add
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: ./
+        with:
+          datadog-api-key:  ${{ secrets.DATADOG_API_KEY_STAGING }}
+          parsley-componentname: cicd
+          parsley-environment: "staging"
