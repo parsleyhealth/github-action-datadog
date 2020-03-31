@@ -11,7 +11,7 @@ const run = async () => {
 
     let payload = await github.context.payload;
 
-    const current_time = Math.round((new Date()).getTime() / 1000);
+    const current_time = parseInt(Math.round((new Date()).getTime() / 1000));
     const reponame = payload.repository.full_name;
     const ref_path = payload.ref;
 
@@ -19,9 +19,9 @@ const run = async () => {
     const gitsha = payload.after; // confirm
     const gitauthor = payload.commits[0]['author']['username'];
     const head_commit_timestamp = Date.parse(payload.head_commit['timestamp']);
-    const last_commit_timestamp = Math.round(head_commit_timestamp / 1000);
+    const last_commit_epoch = parseInt(Math.round(head_commit_timestamp / 1000));
     core.debug("debug")
-    core.debug(current_time + " " + last_commit_timestamp);
+    core.debug(current_time + " " + last_commit_epoch);
 
     const event_title = "Deploy event for " + parsley_componentname + " in env: " + parsley_environment;
     const event_text = "Deploy event for " + parsley_componentname + " in env: " + parsley_environment;
