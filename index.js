@@ -5,7 +5,8 @@ const httpm = require("@actions/http-client");
 
 const run = async () => {
     const datadog_api_key = core.getInput("datadog_api_key");
-    const datadog_uri = "https://api.datadoghq.com/api/v1/series?api_key=" + datadog_api_key
+    const datadog_metric_uri = "https://api.datadoghq.com/api/v1/series?api_key=" + datadog_api_key
+    const datadog_event_uri = "https://api.datadoghq.com/api/v1/events?api_key=" + datadog_api_key
     const parsley_componentname = core.getInput("parsley_componentname");
     const parsley_environment = core.getInput("parsley_environment");
 
@@ -70,15 +71,15 @@ const run = async () => {
         tags: parsley_tags
     });
 
-    var response = await http.post(datadog_uri, datadog_metric_payload);
+    var response = await http.post(datadog_metric_uri, datadog_metric_payload);
     var body = await response.readBody();
     core.debug(body);
 
-    var response = await http.post(datadog_uri, datadog_lead_time_metric_payload);
+    var response = await http.post(datadog_metric_uri, datadog_lead_time_metric_payload);
     var body = await response.readBody();
     core.debug(body);
 
-    var response = await http.post(datadog_uri, datadog_metric_payload);
+    var response = await http.post(datadog_event_uri, datadog_event_payload);
     var body = await response.readBody();
     core.debug(body);
 
