@@ -17,7 +17,7 @@ const run = async () => {
     core.debug(payload.ref);
     core.debug(payload.repository.full_name);
     const current_time = Math.round((new Date()).getTime() / 1000);
-    const reponame = payload.full_name;
+    const reponame = payload.repository.full_name;
     const ref_path = payload.ref;
 
     const branchname = ref_path.split("/").pop();

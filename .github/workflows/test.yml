@@ -10,9 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-
-      - run: npm ci
-
       - uses: ./
         with:
-          datadog_api_key: "foobar"
+          datadog_api_key:  ${{ secrets.DATADOG_API_KEY_STAGING }}
+          parsley_componentname: cicd
+          parsley_environment: "staging"
