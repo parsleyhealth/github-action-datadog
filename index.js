@@ -5,9 +5,8 @@ const httpm = require("@actions/http-client");
 
 const run = async () => {
     const datadog_api_key = core.getInput("datadog_api_key");
-    const datadog_uri_prefix = "https://api.datadoghq.com/api/v1/series?api_key="
-    const datadog_metric_uri = datadog_uri_prefix + datadog_api_key
-    const datadog_event_uri = datadog_uri_prefix + datadog_api_key
+    const datadog_metric_uri = "https://api.datadoghq.com/api/v1/series?api_key=" + datadog_api_key
+    const datadog_event_uri  = "https://api.datadoghq.com/api/v1/events?api_key=" + datadog_api_key
     const parsley_componentname = core.getInput("parsley_componentname");
     const parsley_environment = core.getInput("parsley_environment");
 
