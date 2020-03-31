@@ -11,11 +11,11 @@ const run = async () => {
     const parsley_componentname = 'cicd_test'
     const parsley_environment = 'staging'
 
-    let payload = await github.context.payload
+    let payload = await github.context.payload;
     core.debug("github payload");
 
     core.debug(payload.ref);
-    core.debug(payload.full_name);
+    core.debug(payload.repository.full_name);
     const current_time = Math.round((new Date()).getTime() / 1000);
     const reponame = payload.full_name;
     const ref_path = payload.ref;
