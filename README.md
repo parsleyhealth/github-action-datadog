@@ -5,18 +5,24 @@ This action reports Parsleyhealth cicd metrics and events to datadog
 ## Inputs
 
 
-### `datadog_api_key`: ${{ secrets.DATADOG_API_KEY_STAGING }}
+### `datadog-api-key`: 
+
 **Required** The name of the datadog api key.
 
-### `parsley_componentname`: cicd
+**Example:**  ${{ secrets.DATADOG_API_KEY_STAGING }}
+### `parsley-componentname`
 **Required** The name of the parsley componentname.
 
-### `parsley_environment`: "staging"
+**Example:**  cicd
+
+### `parsley-environment`
 **Required** The name of the parsley environment.
+
+**Example:**  staging
 
 ## Outputs
 
-### `datadog_response`
+### `datadog-response`
 
 Datadog respone
 
@@ -34,7 +40,7 @@ jobs:
         id: hello
         uses: parsleyhealth/github-action-datadog@v1
         with:
-          datadog_api_key: ${{ secrets.DATADOG_API_KEY_STAGING }}
-          parsley_componentname: cicd
-          parsley_environment: "staging"
+          datadog-api-key: ${{ secrets.DATADOG_API_KEY_STAGING }}
+          parsley-componentname: cicd
+          parsley-environment: "staging"
 ```
