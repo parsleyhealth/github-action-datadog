@@ -21,8 +21,6 @@ const run = async () => {
     const gitauthor = payload.commits[0]['author']['username'];
     const head_commit_timestamp = Date.parse(payload.head_commit['timestamp']);
     const last_commit_epoch = parseInt(Math.round(head_commit_timestamp / 1000));
-    core.debug("debug")
-    core.debug(current_time + " " + last_commit_epoch);
     const lead_time = (current_time - last_commit_epoch);
 
     const event_title = "Deploy event for " + parsley_componentname + " in env: " + parsley_environment;
@@ -38,7 +36,8 @@ const run = async () => {
         "branchname:" + branchname,
         "gitsha:" + gitsha,
         "gitauthor:" + gitauthor
-    ]
+    ];
+
     let datadog_lead_time_metric_payload = JSON.stringify({
       series: [
         {
