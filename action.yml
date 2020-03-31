@@ -1,0 +1,22 @@
+name: 'Notification event to datadog'
+description: 'Notify datadog with events'
+branding:
+  icon: message-square
+  color: orange
+inputs:
+  datadog_api_key:
+    description: api key
+    required: true
+  parsley_environment:
+    description: env description
+    required: false
+  parsley_componentname:
+    description: component name
+    required: false
+outputs:
+  datadog_response:
+    description: Datadog response
+
+runs:
+  using: 'node12'
+  main: 'index.js'
