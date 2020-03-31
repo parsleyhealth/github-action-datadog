@@ -6,16 +6,11 @@ const httpm = require("@actions/http-client");
 const run = async () => {
     const datadog_api_key = core.getInput("datadog_api_key");
     const datadog_uri = "https://api.datadoghq.com/api/v1/series?api_key=" + datadog_api_key
-    // const parsley_componentname = core.getInput("parsley_componentname");
-    // const parsley_environment = core.getInput("parsley_environment");
-    const parsley_componentname = 'cicd_test'
-    const parsley_environment = 'staging'
+    const parsley_componentname = core.getInput("parsley_componentname");
+    const parsley_environment = core.getInput("parsley_environment");
 
     let payload = await github.context.payload;
-    core.debug("github payload");
 
-    core.debug(payload.ref);
-    core.debug(payload.repository.full_name);
     const current_time = Math.round((new Date()).getTime() / 1000);
     const reponame = payload.repository.full_name;
     const ref_path = payload.ref;
@@ -26,7 +21,7 @@ const run = async () => {
     const head_commit_timestamp = Date.parse(payload.head_commit['timestamp'])
     const last_commit_timestamp = Math.round(head_commit_timestamp / 1000);
     const lead_time = (current_time - last_commit_timestamp);
-
+    core.debug(lead_time)
     const event_title = "Deploy event for " + parsley_componentname + " in env: " + parsley_environment
     const event_text = "Deploy event for " + parsley_componentname + " in env: " + parsley_environment
     const event_priority = "normal"
