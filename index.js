@@ -26,7 +26,7 @@ const run = async () => {
     const event_text = "Deploy event for " + parsley_componentname + " in env: " + parsley_environment;
     const event_priority = "normal";
 
-    const http = new httpm.HttpClient("http-client-tests");
+    const http = new httpm.HttpClient("http-client-parsley-health-cicd");
 
     const parsley_tags = [
         "environment:" + parsley_environment,
