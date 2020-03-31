@@ -9,10 +9,10 @@ inputs:
     required: true
   parsley_environment:
     description: env description
-    required: false
+    required: true
   parsley_componentname:
     description: component name
-    required: false
+    required: true
 outputs:
   datadog_response:
     description: Datadog response
