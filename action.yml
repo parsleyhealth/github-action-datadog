@@ -4,17 +4,17 @@ branding:
   icon: message-square
   color: orange
 inputs:
-  datadog_api_key:
+  datadog-api-key:
     description: api key
     required: true
-  parsley_environment:
+  parsley-environment:
     description: env description
     required: true
-  parsley_componentname:
+  parsley-componentname:
     description: component name
     required: true
 outputs:
-  datadog_response:
+  datadog-response:
     description: Datadog response
 
 runs:

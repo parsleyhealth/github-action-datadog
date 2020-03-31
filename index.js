@@ -87,7 +87,7 @@ const run = async () => {
             datadog_lead_time_metric: body2,
             datadog_deploy_event: body3
     }
-    core.setOutput("datadog_response", JSON.stringify(output))
+    core.setOutput("datadog-response", JSON.stringify(output))
 };
 
 run();
