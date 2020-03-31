@@ -11,7 +11,7 @@ const run = async () => {
     const parsley_componentname = 'cicd_test'
     const parsley_environment = 'staging'
 
-    let payload = github.context.payload
+    let payload = await github.context.payload
     core.debug("github payload");
 
     core.debug(payload.ref);
