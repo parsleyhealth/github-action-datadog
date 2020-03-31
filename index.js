@@ -22,7 +22,7 @@ const run = async () => {
     const last_commit_epoch = parseInt(Math.round(head_commit_timestamp / 1000));
     core.debug("debug")
     core.debug(current_time + " " + last_commit_epoch);
-    const lead_time = current_time - last_commit_epoch;
+    var lead_time = current_time - last_commit_epoch;
     core.debug(lead_time);
     const event_title = "Deploy event for " + parsley_componentname + " in env: " + parsley_environment;
     const event_text = "Deploy event for " + parsley_componentname + " in env: " + parsley_environment;
@@ -38,7 +38,18 @@ const run = async () => {
         "gitsha:" + gitsha,
         "gitauthor:" + gitauthor
     ]
-
+    // let datadog_lead_time_metric_payload = JSON.stringify({
+    //   series: [
+    //     {
+    //       metric: "com.parsleyhealth.cicd.deploy_lead_time",
+    //       points: [[current_time, lead_time]],
+    //       type: "count",
+    //       interval: 20,
+    //       host: "cicd.parsleyhealth.com",
+    //       tags: parsley_tags
+    //     }
+    //   ]
+    // });
     let datadog_metric_payload = JSON.stringify({
         series: [
             {
