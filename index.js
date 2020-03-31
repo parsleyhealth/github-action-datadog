@@ -11,12 +11,9 @@ const run = async () => {
     const parsley_componentname = 'cicd_test'
     const parsley_environment = 'staging'
 
-    let payload = JSON.stringify(github.context.payload, undefined, 2)
+    let payload = github.context.payload
     core.debug("github payload");
-    core.debug(payload);
-    core.debug(payload["ref"]);
 
-  //
     core.debug(payload.ref);
     core.debug(payload.full_name);
     const current_time = Math.round((new Date()).getTime() / 1000);
