@@ -70,18 +70,18 @@ const run = async () => {
     });
 
     var response = await http.post(datadog_metric_uri, datadog_metric_payload);
-    var body = await response.readBody();
-    core.debug(body);
+    var body1 = await response.readBody();
+    core.debug(body1);
 
     var response = await http.post(datadog_metric_uri, datadog_lead_time_metric_payload);
-    var body = await response.readBody();
-    core.debug(body);
+    var body2 = await response.readBody();
+    core.debug(body2);
 
     var response = await http.post(datadog_event_uri, datadog_event_payload);
-    var body = await response.readBody();
-    core.debug(body);
+    var body3 = await response.readBody();
+    core.debug(body3);
 
-    core.setOutput("datadog_response", body)
+    core.setOutput("datadog_response", [body1, body2, body3])
 };
 
 run();
