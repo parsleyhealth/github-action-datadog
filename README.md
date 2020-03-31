@@ -1,4 +1,4 @@
-# Hello world javascript action
+# Parsley Health CICD Datadog plugin
 
 This action reports Parsleyhealth cicd metrics and events to datadog
 
