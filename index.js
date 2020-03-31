@@ -16,15 +16,16 @@ const run = async () => {
     const ref_path = payload.ref;
 
     const branchname = ref_path.split("/").pop();
-    const gitsha = payload.after // confirm
-    const gitauthor = payload.commits[0]['author']['username']
-    const head_commit_timestamp = Date.parse(payload.head_commit['timestamp'])
+    const gitsha = payload.after; // confirm
+    const gitauthor = payload.commits[0]['author']['username'];
+    const head_commit_timestamp = Date.parse(payload.head_commit['timestamp']);
     const last_commit_timestamp = Math.round(head_commit_timestamp / 1000);
-    const lead_time = (current_time - last_commit_timestamp);
-    core.debug(lead_time)
-    const event_title = "Deploy event for " + parsley_componentname + " in env: " + parsley_environment
-    const event_text = "Deploy event for " + parsley_componentname + " in env: " + parsley_environment
-    const event_priority = "normal"
+    core.debug("debug")
+    core.debug(current_time -  last_commit_timestamp);
+
+    const event_title = "Deploy event for " + parsley_componentname + " in env: " + parsley_environment;
+    const event_text = "Deploy event for " + parsley_componentname + " in env: " + parsley_environment;
+    const event_priority = "normal";
 
     const http = new httpm.HttpClient("http-client-tests");
 
