@@ -33,7 +33,6 @@ const run = async () => {
         "componentname:" + parsley_componentname,
         "reponame:" + reponame,
         "branchname:" + branchname,
-        "gitsha:" + gitsha,
         "gitauthor:" + gitauthor
     ];
 
