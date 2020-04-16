@@ -12,15 +12,15 @@ const run = async () => {
 
     let context = await github.context;
 
-    // we can only get required data out of certain event objects
-    if (context.eventName === 'push') {
+    // we can only get required data out of certain event objects types
+    if (context.eventName === 'push' || context.eventName === 'repository_dispatch') {
 
         const payload = context.payload;
         const current_time = parseInt(Math.round((new Date()).getTime() / 1000));
         const reponame = payload.repository.full_name;
         const ref_path = payload.ref;
         const branchname = ref_path.split('/').pop();
-        const gitauthor = payload.commits[0]['author']['username'];
+        #const gitauthor = payload.commits[0]['author']['username'];
         const head_commit_timestamp = Date.parse(payload.head_commit['timestamp']);
         const last_commit_epoch = parseInt(Math.round(head_commit_timestamp / 1000));
         const lead_time = (current_time - last_commit_epoch);
@@ -90,6 +90,10 @@ const run = async () => {
                 datadog_deploy_event: body3
         }
         core.setOutput("datadog-response", JSON.stringify(output))
+    }
+
+    else {
+        core.setOutput("action-response", "This action only runs on a push or repository_dispatch event.")
     }
 };
 

@@ -1,5 +1,5 @@
-name: 'Notification event to datadog'
-description: 'Notify datadog with events'
+name: 'Post metrics and events to Datadog'
+description: 'Post metrics and events to Datadog'
 branding:
   icon: message-square
   color: orange
@@ -16,6 +16,8 @@ inputs:
 outputs:
   datadog-response:
     description: Datadog response
+  action-response:
+    description: Messages from this github action
 
 runs:
   using: 'node12'
