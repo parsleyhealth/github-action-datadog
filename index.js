@@ -53,6 +53,7 @@ const run = async () => {
             }
             ]
     });
+
     let datadog_metric_payload = JSON.stringify({
             series: [
                 {
