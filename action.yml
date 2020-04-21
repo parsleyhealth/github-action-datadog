@@ -16,8 +16,6 @@ inputs:
 outputs:
   datadog-response:
     description: Datadog response
-  action-response:
-    description: Messages from this github action
 
 runs:
   using: 'node12'

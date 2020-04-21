@@ -11,8 +11,7 @@ const run = async () => {
     const parsley_environment = core.getInput("parsley-environment");
 
     if (datadog_api_key == undefined){
-        console.log(`Please set DATADOG_API_KEY_PRODUCTION or DATADOG_API_KEY_STAGING in GitHub -> repository -> Settings -> Secrets.`);
-        process.exitCode = 1;
+        core.setFailed("Please set DATADOG_API_KEY_PRODUCTION or DATADOG_API_KEY_STAGING in GitHub -> repository -> Settings -> Secrets.")
     }
 
     let context = await github.context;
