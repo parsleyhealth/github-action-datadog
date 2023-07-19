@@ -13,7 +13,7 @@ const run = async () => {
     core.debug("datadog_api_key set to " + datadog_api_key);
 
     if (!datadog_api_key) {
-        core.setFailed("Please set DATADOG_API_KEY_PRODUCTION or DATADOG_API_KEY_STAGING in GitHub -> repository -> Settings -> Secrets.");
+        core.setFailed("Please set DD_API_KEY_PRODUCTION or DD_API_KEY_STAGING in GitHub -> repository -> Settings -> Secrets.");
         return;
     }
 
