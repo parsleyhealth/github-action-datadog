@@ -20,8 +20,12 @@ const run = async () => {
 
     const payload = context.payload;
     const current_time = parseInt(Math.round((new Date()).getTime() / 1000));
-    const reponame = payload.repository.full_name;
+    const reponame = payload.repository?.full_name;
     const ref_path = payload.ref;
+    if (!ref_path) {
+        core.setFailed("Ref path is undefined or null.");
+        return;
+    }
     const branchname = ref_path.split('/').pop();
     const gitauthor = payload.commits[0]?.['author']['username'];
     const head_commit_timestamp = Date.parse(payload.head_commit['timestamp']);
