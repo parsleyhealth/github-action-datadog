@@ -12,8 +12,9 @@ const run = async () => {
 
     core.debug("datadog_api_key set to " + datadog_api_key);
 
-    if (datadog_api_key === null){
-        core.setFailed("Please set DATADOG_API_KEY_PRODUCTION or DATADOG_API_KEY_STAGING in GitHub -> repository -> Settings -> Secrets.")
+    if (!datadog_api_key) {
+        core.setFailed("Please set DATADOG_API_KEY_PRODUCTION or DATADOG_API_KEY_STAGING in GitHub -> repository -> Settings -> Secrets.");
+        return;
     }
 
     let context = await github.context;
@@ -22,11 +23,7 @@ const run = async () => {
     const current_time = parseInt(Math.round((new Date()).getTime() / 1000));
     const reponame = payload.repository?.full_name;
     const ref_path = payload.ref;
-    if (!ref_path) {
-        core.setFailed("Ref path is undefined or null.");
-        return;
-    }
-    const branchname = ref_path.split('/').pop();
+    const branchname = ref_path ? ref_path.split('/').pop() : '';
     const gitauthor = payload.commits[0]?.['author']['username'];
     const head_commit_timestamp = Date.parse(payload.head_commit['timestamp']);
     const last_commit_epoch = parseInt(Math.round(head_commit_timestamp / 1000));
