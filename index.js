@@ -12,9 +12,8 @@ const run = async () => {
 
     core.debug("datadog_api_key set to " + datadog_api_key);
 
-    if (!datadog_api_key) {
+    if (!datadog_api_key  === null) {
         core.setFailed("Please set DD_API_KEY_PRODUCTION or DD_API_KEY_STAGING in GitHub -> repository -> Settings -> Secrets.");
-        return;
     }
 
     let context = await github.context;
