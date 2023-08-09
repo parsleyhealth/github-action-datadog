@@ -16,14 +16,17 @@ const run = async () => {
         core.setFailed("Please set DD_API_KEY_PRODUCTION or DD_API_KEY_STAGING in GitHub -> repository -> Settings -> Secrets.");
     }
 
-    let context = await github.context;
+    let context = github.context;
 
     const payload = context.payload;
     const current_time = parseInt(Math.round((new Date()).getTime() / 1000));
     const reponame = payload.repository?.full_name;
     const ref_path = payload.ref;
     const branchname = ref_path ? ref_path.split('/').pop() : '';
-    const gitauthor = payload.commits[0]?.['author']['username'];
+    // Check if commits array is not empty and head_commit is available
+    const gitauthor = payload.commits && payload.commits.length > 0
+        ? payload.commits[0]?.author?.username
+        : "Unknown Author";
     const head_commit_timestamp = Date.parse(payload.head_commit['timestamp']);
     const last_commit_epoch = parseInt(Math.round(head_commit_timestamp / 1000));
     const lead_time = (current_time - last_commit_epoch);
